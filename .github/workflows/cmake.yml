@@ -7,24 +7,41 @@ on:
     branches: [ master ]
 
 jobs:
-  buid:
-    runs-on: ubuntu-latest
-
+  build:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        compiler: [gcc, clang]
-
+        os: [ubuntu-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            compiler: gcc
+            c_compiler: gcc
+            cpp_compiler: g++
+          - os: ubuntu-latest
+            compiler: clang
+            c_compiler: clang
+            cpp_compiler: clang++
+          - os: windows-latest
+            compiler: msvc
+            c_compiler: cl
+            cpp_compiler: cl
     steps:
     - uses: actions/checkout@v4
 
-    - name: Configure CMake (formatter_lib)
-      run: cmake -B formatter_lib/build -S formatter_lib
+    - name: Configure and build all components
+      run: |
+        cmake -B formatter_lib/build -S formatter_lib
+        cmake --build formatter_lib/build --config Release
 
-    - name: Build formatter_lib
-      run: cmake --build formatter_lib/build
+        cmake -B formatter_ex_lib/build -S formatter_ex_lib -DCMAKE_PREFIX_PATH=../formatter_lib/build
+        cmake --build formatter_ex_lib/build --config Release
 
-    - name: Configure CMake (formatter_ex_lib)
-      run: cmake -B formatter_ex_lib/build -S formatter_ex_lib -DCMAKE_PREFIX_PATH=../formatter_lib/build
+        cmake -B solver_lib/build -S solver_lib
+        cmake --build solver_lib/build --config Release
 
-    - name: Build formatter_ex_lib
-      run: cmake --build formatter_ex_lib/build
+        cmake -B hello_world_application/build -S hello_world_application
+        cmake --build hello_world_application/build --config Release
+
+        cmake -B solver_application/build -S solver_application
+        cmake --build solver_application/build --config Release
+
