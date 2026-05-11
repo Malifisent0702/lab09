@@ -1,14 +1,12 @@
 # lab04
 
-
 ## CI Status
 
-### GitHub Actions (Linux)
-
+### Linux (GitHub Actions)
 [![CMake Build](https://github.com/Malifisent0702/lab04/actions/workflows/cmake.yml/badge.svg)](https://github.com/Malifisent0702/lab04/actions/workflows/cmake.yml)
 
 
-### AppVeyor (Windows)
+### Windows (AppVeyor)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Malifisent0702/lab04?branch=master&svg=true)](https://ci.appveyor.com/project/Malifisent0702/lab04)
 
 
@@ -20,4 +18,6 @@
 - `solver_lib/` - static library solver
 
 - `hello_world_application/` - demo application
+
 - `solver_application/` - quadratic equation solver
+
