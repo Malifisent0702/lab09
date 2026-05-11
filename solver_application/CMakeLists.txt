@@ -6,11 +6,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(solver equation.cpp)
 
-target_link_libraries(solver
-    ${CMAKE_CURRENT_SOURCE_DIR}/../formatter_ex_lib/build/Release/formatter_ex.lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/../formatter_lib/build/Release/formatter.lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/../solver_lib/build/Release/solver_lib.lib
-)
+if(WIN32)
+    target_link_libraries(solver
+        ${CMAKE_CURRENT_SOURCE_DIR}/../formatter_ex_lib/build/Release/formatter_ex.lib
+        ${CMAKE_CURRENT_SOURCE_DIR}/../formatter_lib/build/Release/formatter.lib
+        ${CMAKE_CURRENT_SOURCE_DIR}/../solver_lib/build/Release/solver_lib.lib
+    )
+else()
+    target_link_libraries(solver
+        ${CMAKE_CURRENT_SOURCE_DIR}/../formatter_ex_lib/build/libformatter_ex.a
+        ${CMAKE_CURRENT_SOURCE_DIR}/../formatter_lib/build/libformatter.a
+        ${CMAKE_CURRENT_SOURCE_DIR}/../solver_lib/build/libsolver_lib.a
+    )
+endif()
 
 target_include_directories(solver PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../formatter_ex_lib
