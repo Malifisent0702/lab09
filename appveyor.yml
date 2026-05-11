@@ -1,0 +1,20 @@
+version: 1.0.{build}
+
+image: Visual Studio 2019
+
+platform: x64
+
+configuration: Release
+
+clone_folder: C:\projects\lab04
+
+before_build:
+  - cd C:\projects\lab04
+  - mkdir build_formatter_lib
+  - cd build_formatter_lib
+  - cmake -G "Visual Studio 16 2019" -A x64 ..
+  - cmake --build . --config Release
+
+build: off
+test: off
+deploy: off
