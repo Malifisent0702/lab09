@@ -2,3 +2,10 @@
 *install*/
 *.swp
 .idea/
+
+# Package artifacts
+*.deb
+*.rpm
+*.tar.gz
+_build/
+print-*.tar.gz
