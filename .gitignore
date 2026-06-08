@@ -9,3 +9,4 @@
 *.tar.gz
 _build/
 print-*.tar.gz
+artifacts/
